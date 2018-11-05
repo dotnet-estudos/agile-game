@@ -13,7 +13,7 @@ using Domain.Entidade;
 
 namespace Web.Controllers.API
 {
-    public class LancamentoChamadosController : ApiController
+    public class LancamentoChamadoController : ApiController
     {
         private AgileGameContexto db = new AgileGameContexto();
 

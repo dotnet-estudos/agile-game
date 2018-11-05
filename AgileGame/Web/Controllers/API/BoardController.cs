@@ -13,44 +13,44 @@ using Domain.Entidade;
 
 namespace Web.Controllers.API
 {
-    public class JogoesController : ApiController
+    public class BoardController : ApiController
     {
         private AgileGameContexto db = new AgileGameContexto();
 
-        // GET: api/Jogoes
-        public IQueryable<Jogo> GetJogo()
+        // GET: api/Boards
+        public IQueryable<Board> GetBoard()
         {
-            return db.Jogo;
+            return db.Board;
         }
 
-        // GET: api/Jogoes/5
-        [ResponseType(typeof(Jogo))]
-        public IHttpActionResult GetJogo(int id)
+        // GET: api/Boards/5
+        [ResponseType(typeof(Board))]
+        public IHttpActionResult GetBoard(int id)
         {
-            Jogo jogo = db.Jogo.Find(id);
-            if (jogo == null)
+            Board board = db.Board.Find(id);
+            if (board == null)
             {
                 return NotFound();
             }
 
-            return Ok(jogo);
+            return Ok(board);
         }
 
-        // PUT: api/Jogoes/5
+        // PUT: api/Boards/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutJogo(int id, Jogo jogo)
+        public IHttpActionResult PutBoard(int id, Board board)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != jogo.JogoId)
+            if (id != board.BoardId)
             {
                 return BadRequest();
             }
 
-            db.Entry(jogo).State = EntityState.Modified;
+            db.Entry(board).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace Web.Controllers.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JogoExists(id))
+                if (!BoardExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace Web.Controllers.API
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Jogoes
-        [ResponseType(typeof(Jogo))]
-        public IHttpActionResult PostJogo(Jogo jogo)
+        // POST: api/Boards
+        [ResponseType(typeof(Board))]
+        public IHttpActionResult PostBoard(Board board)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Jogo.Add(jogo);
+            db.Board.Add(board);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = jogo.JogoId }, jogo);
+            return CreatedAtRoute("DefaultApi", new { id = board.BoardId }, board);
         }
 
-        // DELETE: api/Jogoes/5
-        [ResponseType(typeof(Jogo))]
-        public IHttpActionResult DeleteJogo(int id)
+        // DELETE: api/Boards/5
+        [ResponseType(typeof(Board))]
+        public IHttpActionResult DeleteBoard(int id)
         {
-            Jogo jogo = db.Jogo.Find(id);
-            if (jogo == null)
+            Board board = db.Board.Find(id);
+            if (board == null)
             {
                 return NotFound();
             }
 
-            db.Jogo.Remove(jogo);
+            db.Board.Remove(board);
             db.SaveChanges();
 
-            return Ok(jogo);
+            return Ok(board);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace Web.Controllers.API
             base.Dispose(disposing);
         }
 
-        private bool JogoExists(int id)
+        private bool BoardExists(int id)
         {
-            return db.Jogo.Count(e => e.JogoId == id) > 0;
+            return db.Board.Count(e => e.BoardId == id) > 0;
         }
     }
 }

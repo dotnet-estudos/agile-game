@@ -128,10 +128,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\API\BoardsController.cs" />
-    <Compile Include="Controllers\API\JogoesController.cs" />
-    <Compile Include="Controllers\API\LancamentoBoardsController.cs" />
-    <Compile Include="Controllers\API\LancamentoChamadosController.cs" />
+    <Compile Include="Controllers\API\BoardController.cs" />
+    <Compile Include="Controllers\API\JogoController.cs" />
+    <Compile Include="Controllers\API\LancamentoBoardController.cs" />
+    <Compile Include="Controllers\API\LancamentoChamadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
     <Compile Include="Global.asax.cs">

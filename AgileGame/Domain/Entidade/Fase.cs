@@ -8,6 +8,8 @@
 
         public string Nome { get; set; }
 
+        public string RGB { get; set; }
+
         public int Ordem { get; set; }
 
         public bool Ativo { get; set; }

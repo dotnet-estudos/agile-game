@@ -15,7 +15,7 @@ namespace Data.Contexto
     {
         static AgileGameContexto()
         {
-            Database.SetInitializer<AgileGameContexto>(new BdInitializer<AgileGameContexto>());
+            //Database.SetInitializer<AgileGameContexto>(new BdInitializer<AgileGameContexto>());
 
         }
 
@@ -266,7 +266,7 @@ namespace Data.Contexto
 
 
 
-        private class BdInitializer<T> : DropCreateDatabaseAlways<AgileGameContexto>
+        private class BdInitializer<T> : DropCreateDatabaseIfModelChanges<AgileGameContexto>
         {
 
             protected override void Seed(AgileGameContexto context)

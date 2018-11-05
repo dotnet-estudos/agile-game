@@ -54,6 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexto\AgileGameContexto.cs" />
+    <Compile Include="Migrations\201811051301086_InitialCreate.cs" />
+    <Compile Include="Migrations\201811051301086_InitialCreate.Designer.cs">
+      <DependentUpon>201811051301086_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811051354317_Alteracao_Jogo.cs" />
+    <Compile Include="Migrations\201811051354317_Alteracao_Jogo.Designer.cs">
+      <DependentUpon>201811051354317_Alteracao_Jogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811051402081_Alteracao_fase_cor.cs" />
+    <Compile Include="Migrations\201811051402081_Alteracao_fase_cor.Designer.cs">
+      <DependentUpon>201811051402081_Alteracao_fase_cor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +81,17 @@
       <Project>{9E983636-653B-436F-B317-7F05BF79525F}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811051301086_InitialCreate.resx">
+      <DependentUpon>201811051301086_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811051354317_Alteracao_Jogo.resx">
+      <DependentUpon>201811051354317_Alteracao_Jogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811051402081_Alteracao_fase_cor.resx">
+      <DependentUpon>201811051402081_Alteracao_fase_cor.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

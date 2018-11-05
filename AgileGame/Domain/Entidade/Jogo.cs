@@ -10,6 +10,10 @@ namespace Domain.Entidade
     {
         public int JogoId { get; set; }
 
+        public string NomeTurma { get; set; }
+
+        public int QuantidadeEquipes { get; set; }
+
         public DateTime DataCadastro { get; set; }
 
         public bool Finalizado { get; set; }
