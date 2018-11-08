@@ -10,6 +10,8 @@ namespace Domain.Entidade
     {
         public int JogoId { get; set; }
 
+        public int BoardId { get; set; }
+
         public string NomeTurma { get; set; }
 
         public int QuantidadeEquipes { get; set; }
@@ -19,5 +21,7 @@ namespace Domain.Entidade
         public bool Finalizado { get; set; }
 
         public DateTime? DataHoraFim { get; set; }
+
+        public Board Board { get; set; }
     }
 }

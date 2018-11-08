@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Data.Contexto
         static AgileGameContexto()
         {
             //Database.SetInitializer<AgileGameContexto>(new BdInitializer<AgileGameContexto>());
+            Database.SetInitializer<AgileGameContexto>(null);
 
         }
 
@@ -46,6 +48,8 @@ namespace Data.Contexto
         public DbSet<Fase> Fase { get; set; }
         public DbSet<Board> Board { get; set; }
         public DbSet<LancamentoBoard> LancamentoBoard { get; set; }
+        public DbSet<Kaizen> Kaizen { get; set; }
+        public DbSet<LancamentoKaizen> LancamentoKaizen { get; set; }
         
         
 
@@ -138,8 +142,15 @@ namespace Data.Contexto
             return keyNames;
         }
 
+
+        public int SaveChangesSeed()
+        {
+           return base.SaveChanges();
+        }
+
         public override int SaveChanges()
         {
+
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
             {
 
@@ -340,7 +351,7 @@ namespace Data.Contexto
 
                 base.Seed(context);
             }
-        } 
+        }
 
 
     }

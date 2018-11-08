@@ -3,7 +3,7 @@ namespace Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -35,11 +35,16 @@ namespace Data.Migrations
                 c => new
                     {
                         JogoId = c.Int(nullable: false, identity: true),
+                        BoardId = c.Int(nullable: false),
+                        NomeTurma = c.String(maxLength: 100, unicode: false),
+                        QuantidadeEquipes = c.Int(nullable: false),
                         DataCadastro = c.DateTime(nullable: false),
                         Finalizado = c.Boolean(nullable: false),
                         DataHoraFim = c.DateTime(),
                     })
-                .PrimaryKey(t => t.JogoId);
+                .PrimaryKey(t => t.JogoId)
+                .ForeignKey("dbo.Board", t => t.BoardId)
+                .Index(t => t.BoardId);
             
             CreateTable(
                 "dbo.Fase",
@@ -48,12 +53,27 @@ namespace Data.Migrations
                         FaseId = c.Int(nullable: false, identity: true),
                         BoardId = c.Int(nullable: false),
                         Nome = c.String(maxLength: 100, unicode: false),
+                        RGB = c.String(maxLength: 100, unicode: false),
                         Ordem = c.Int(nullable: false),
                         Ativo = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.FaseId)
                 .ForeignKey("dbo.Board", t => t.BoardId)
                 .Index(t => t.BoardId);
+            
+            CreateTable(
+                "dbo.Kaizen",
+                c => new
+                    {
+                        KaizenId = c.Int(nullable: false, identity: true),
+                        Letra = c.String(maxLength: 100, unicode: false),
+                        Descricao = c.String(maxLength: 100, unicode: false),
+                        Esforco = c.Int(nullable: false),
+                        Repeticao = c.Int(nullable: false),
+                        Requisito = c.String(maxLength: 100, unicode: false),
+                        Ativo = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.KaizenId);
             
             CreateTable(
                 "dbo.LancamentoBoard",
@@ -93,6 +113,19 @@ namespace Data.Migrations
                 .Index(t => t.JogoId);
             
             CreateTable(
+                "dbo.LancamentoKaizen",
+                c => new
+                    {
+                        LancamentoKaizenId = c.Int(nullable: false, identity: true),
+                        KaizenId = c.Int(nullable: false),
+                        JogoId = c.Int(nullable: false),
+                        EquipeId = c.Int(nullable: false),
+                        DiaConlcusao = c.Int(nullable: false),
+                        DiaInicio = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.LancamentoKaizenId);
+            
+            CreateTable(
                 "dbo.LogGame",
                 c => new
                     {
@@ -113,12 +146,13 @@ namespace Data.Migrations
                 "dbo.Usuario",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        UsuarioId = c.Int(nullable: false, identity: true),
                         Login = c.String(maxLength: 100, unicode: false),
                         Senha = c.String(maxLength: 100, unicode: false),
                         Email = c.String(maxLength: 100, unicode: false),
+                        Ativo = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.UsuarioId);
             
         }
         
@@ -131,17 +165,21 @@ namespace Data.Migrations
             DropForeignKey("dbo.LancamentoBoard", "EquipeId", "dbo.Equipe");
             DropForeignKey("dbo.Fase", "BoardId", "dbo.Board");
             DropForeignKey("dbo.Equipe", "JogoId", "dbo.Jogo");
+            DropForeignKey("dbo.Jogo", "BoardId", "dbo.Board");
             DropIndex("dbo.LancamentoChamado", new[] { "JogoId" });
             DropIndex("dbo.LancamentoChamado", new[] { "EquipeId" });
             DropIndex("dbo.LancamentoBoard", new[] { "FaseId" });
             DropIndex("dbo.LancamentoBoard", new[] { "EquipeId" });
             DropIndex("dbo.LancamentoBoard", new[] { "JogoId" });
             DropIndex("dbo.Fase", new[] { "BoardId" });
+            DropIndex("dbo.Jogo", new[] { "BoardId" });
             DropIndex("dbo.Equipe", new[] { "JogoId" });
             DropTable("dbo.Usuario");
             DropTable("dbo.LogGame");
+            DropTable("dbo.LancamentoKaizen");
             DropTable("dbo.LancamentoChamado");
             DropTable("dbo.LancamentoBoard");
+            DropTable("dbo.Kaizen");
             DropTable("dbo.Fase");
             DropTable("dbo.Jogo");
             DropTable("dbo.Equipe");

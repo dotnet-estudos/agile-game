@@ -18,7 +18,8 @@ namespace Web.Controllers
         // GET: Jogo
         public ActionResult Index()
         {
-            return View(db.Jogo.ToList());
+            var jogo = db.Jogo.Include(j => j.Board);
+            return View(jogo.ToList());
         }
 
         // GET: Jogo/Details/5
@@ -39,6 +40,7 @@ namespace Web.Controllers
         // GET: Jogo/Create
         public ActionResult Create()
         {
+            ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "JogoId,DataCadastro,Finalizado,DataHoraFim")] Jogo jogo)
+        public ActionResult Create([Bind(Include = "JogoId,BoardId,NomeTurma,QuantidadeEquipes,DataCadastro,Finalizado,DataHoraFim")] Jogo jogo)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);
             return View(jogo);
         }
 
@@ -71,6 +74,7 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);
             return View(jogo);
         }
 
@@ -79,7 +83,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "JogoId,DataCadastro,Finalizado,DataHoraFim")] Jogo jogo)
+        public ActionResult Edit([Bind(Include = "JogoId,BoardId,NomeTurma,QuantidadeEquipes,DataCadastro,Finalizado,DataHoraFim")] Jogo jogo)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);
             return View(jogo);
         }
 

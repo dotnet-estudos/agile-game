@@ -12,9 +12,7 @@ namespace Domain.Entidade
         public int JogoId { get; set; }
         public int EquipeId { get; set; }
         public int DiaLancamento { get; set; }
-
         public int FaseId { get; set; }
-
         public int Quantidade { get; set; }
 
 
