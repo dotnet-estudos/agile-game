@@ -3,12 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Consultar CPF</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Compras")
+    @{Html.RenderPartial("~/Views/Shared/_Mensagem.cshtml");}
+
+    <link rel="stylesheet" type="text/css" href="/Content/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/demo.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/component1.css" />
+    <script src="/Scripts/modernizr-2.6.2.min.js"></script>
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -16,27 +26,57 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+
+        @*<hr />
+            <footer>
+               <p>&copy; @DateTime.Now.Year - AgileGame</p>
+            </footer>*@
+
+        <div class="component">
+            <!-- Start Nav Structure -->
+            <button class="cn-button" id="cn-button">+</button>
+            <div class="cn-wrapper" id="cn-wrapper">
+                <ul>
+                    <li><a href="#"><span class="icon-male"></span></a></li>
+                    <li><a href="#"><span class="icon-group"></span></a></li>
+                    <li><a href="#"><span class="icon-home"></span></a></li>
+                    <li><a href="#"><span class="icon-facetime-video"></span></a></li>
+                    <li><a href="#"><span class="icon-envelope-alt"></span></a></li>
+                    
+                </ul>
+            </div>
+            <div id="cn-overlay" class="cn-overlay"></div>
+            <!-- End Nav Structure -->
+        </div>
+
+        <script src="/Scripts/polyfills.js"></script>
+        <script src="/Scripts/demo1.js"></script>
+
+       @* <div class="navbar-expand-lg navbar-light bg-light fixed-bottom" style="background-color: #ffffff; ">*@
+            @*<hr />*@
+            @*<footer class="text-center">
+                <p>
+                    &copy; @DateTime.Now.Year - AgileGame
+                </p>
+            </footer>
+        </div>*@
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

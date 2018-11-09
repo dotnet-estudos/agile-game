@@ -11,6 +11,12 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+	     bundles.Add(new ScriptBundle("~/bundles/compras").Include(
+                        "~/Scripts/sweetalert2.min.js",
+                        "~/Scripts/comprasnet.utils.js"
+                        ));
+
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 

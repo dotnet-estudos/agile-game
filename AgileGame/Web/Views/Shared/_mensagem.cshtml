@@ -1,0 +1,57 @@
+﻿
+@{
+    var Mensagem = "";
+    var Titulo = "";
+    var Tipo = "";
+    if (TempData["Mensagem"] != null)
+    {
+        Mensagem = (TempData["Mensagem"] != null ? TempData["Mensagem"].ToString() : string.Empty);
+        Titulo = (TempData["Titulo"] != null ? TempData["Titulo"].ToString() : "");
+        Tipo = (TempData["Tipo"] != null ? TempData["Tipo"].ToString() : string.Empty);
+    }
+}
+
+@if(!string.IsNullOrWhiteSpace(Mensagem))
+{
+    <script>
+        (function() {
+            'use strict';
+            $(document).ready(function () {
+                var mensagem = '@Html.Raw(Mensagem)';
+                var titulo = '@Html.Raw(Titulo)';
+                var tipo = '@Html.Raw(Tipo)';
+
+                switch (tipo) {
+                case "sucesso":
+                    comprasnet.alertSucesso(mensagem);
+                    break;
+                case "erro":
+                    comprasnet.alertErro(mensagem);
+                    break;
+                    case "atenção":
+                    comprasnet.alertAtencao(Mensagem);
+                    break;
+                default:
+                    comprasnet.alert(titulo, mensagem);
+                    break;
+                }
+            });
+        })();
+    </script>
+}
+
+<script>
+
+    function MensagemConfirma(Titulo, Mensagem, Link) {
+        comprasnet.confirm(Mensagem, function () {
+            location.href = Link;
+        });
+    }
+
+    function Mensagem(Titulo, Mensagem) {
+        if (Titulo == 'Atenção' || Titulo == "Alerta")
+            comprasnet.alertAtencao(Mensagem);
+        else
+            comprasnet.alert(Titulo, Mensagem);
+    }
+</script>

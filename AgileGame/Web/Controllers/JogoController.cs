@@ -53,13 +53,31 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                jogo.Equipes =new List<Equipe>();;
+
+                for (int i = 0; i < jogo.QuantidadeEquipes; i++)
+                {
+                   jogo.Equipes.Add(new Equipe
+                   {
+                       Hash = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(1, 4).ToUpper(),
+                       Jogo =jogo,
+                       
+                   });
+                }
                 db.Jogo.Add(jogo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("RegistroEquipes", jogo.JogoId);
             }
 
             ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);
             return View(jogo);
+        }
+
+        public ActionResult RegistroEquipes(int id)
+        {
+            var jogo = db.Jogo.Include(x=>x.Equipes).FirstOrDefault(x => x.JogoId == id);
+            return View("RegistroEquipes", jogo);
         }
 
         // GET: Jogo/Edit/5

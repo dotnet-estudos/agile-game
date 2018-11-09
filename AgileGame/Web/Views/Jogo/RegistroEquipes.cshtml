@@ -1,0 +1,19 @@
+﻿@model Domain.Entidade.Jogo
+
+<div>
+    <h4>Jogo Da Turma: @Model.NomeTurma</h4>
+    <hr />
+</div>
+
+@{
+    foreach (var equipe in Model.Equipes)
+    {
+        <div class="row">
+            <div class="col-sm-6">
+                @Html.Partial("_Equipe", equipe)
+            </div>
+        </div>
+    }
+}
+
+

@@ -163,13 +163,45 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\component1.css" />
+    <Content Include="Content\demo.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\img\brasao.png" />
+    <Content Include="Content\img\BrasaoBlack.png" />
+    <Content Include="Content\img\loading.gif" />
+    <Content Include="Content\img\logo-governo-bahia-172x68.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\Logo_ComprasNet.png" />
+    <Content Include="Content\img\logo_comprasnet_login.png" />
+    <Content Include="Content\img\Logo_Governo_Bahia.gif" />
+    <Content Include="Content\img\logo_governo_bahia_g.jpg" />
+    <Content Include="Content\img\rh.jpg" />
+    <Content Include="Content\img\rh_marcio.jpg" />
+    <Content Include="Content\img\rh_marcio2.jpg" />
+    <Content Include="Content\img\usuario.png" />
+    <Content Include="Content\normalize.css" />
+    <Content Include="Content\sweetalert.css" />
+    <Content Include="Content\sweetalert2.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\codropsicons\codropsicons.svg" />
+    <Content Include="fonts\codropsicons\license.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\codropsicons\codropsicons.eot" />
+    <Content Include="fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="fonts\codropsicons\codropsicons.woff" />
+    <Content Include="fonts\codropsicons\codropsicons.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\comprasnet.utils.js" />
+    <Content Include="Scripts\demo1.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -178,8 +210,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.6.2.min.js" />
+    <Content Include="Scripts\polyfills.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sweetalert2.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -201,6 +236,14 @@
     <Content Include="Views\Jogo\Details.cshtml" />
     <Content Include="Views\Jogo\Edit.cshtml" />
     <Content Include="Views\Jogo\Index.cshtml" />
+    <Content Include="Views\Jogo\RegistroEquipes.cshtml" />
+    <None Include="Views\Jogo\_Equipe.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_mensagem.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

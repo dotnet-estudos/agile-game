@@ -23,5 +23,7 @@ namespace Domain.Entidade
         public DateTime? DataHoraFim { get; set; }
 
         public Board Board { get; set; }
+
+        public List<Equipe> Equipes { get; set; }
     }
 }
