@@ -1,12 +1,12 @@
 ﻿@model Domain.Entidade.Equipe
 
 
-<div class="card  text-white mb-3 @(Model.Nome != null ? "bg-sucess" : "bg-primary")">
+<div class="card  text-white mb-3 @(Model.Nome != null ? "bg-success" : "bg-primary")">
+    <div class="card-header">Equipe @(Model.Nome != null ? "Pronta" : "Aguardando")</div>
     <div class="card-body">
-        <h5 class="card-title">Equipe @(Model.Nome != null ? "Pronta" : "Aguardando")</h5>
+        <h5 class="card-title">@Html.DisplayFor(model => model.Hash)</h5>
         <p class="card-text">
-            @Html.DisplayFor(model => model.Hash)
-
+            
             @Html.DisplayFor(model => model.Nome)
         </p>
     </div>

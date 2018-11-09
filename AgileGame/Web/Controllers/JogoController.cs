@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Data.Contexto;
@@ -60,14 +61,14 @@ namespace Web.Controllers
                 {
                    jogo.Equipes.Add(new Equipe
                    {
-                       Hash = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(1, 4).ToUpper(),
+                       Hash = Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[^0-9a-zA-Z]+", "").Substring(1, 5).ToUpper(),
                        Jogo =jogo,
                        
                    });
                 }
                 db.Jogo.Add(jogo);
                 db.SaveChanges();
-                return RedirectToAction("RegistroEquipes", jogo.JogoId);
+                return View("RegistroEquipes", jogo);
             }
 
             ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);

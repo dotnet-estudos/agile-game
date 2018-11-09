@@ -6,14 +6,16 @@
 </div>
 
 @{
-    foreach (var equipe in Model.Equipes)
-    {
-        <div class="row">
-            <div class="col-sm-6">
-                @Html.Partial("_Equipe", equipe)
-            </div>
+    <div class="card-deck">
+        @foreach (var equipe in Model.Equipes)
+        {
+
+        <div class="col-sm-4">
+            @Html.Partial("_Equipe", equipe)
         </div>
-    }
+
+        }
+    </div>
 }
 
 

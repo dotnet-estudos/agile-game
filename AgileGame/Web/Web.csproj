@@ -148,6 +148,7 @@
     <Compile Include="Controllers\API\KaizenController.cs" />
     <Compile Include="Controllers\API\LancamentoBoardController.cs" />
     <Compile Include="Controllers\API\LancamentoChamadoController.cs" />
+    <Compile Include="Controllers\EquipeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +238,12 @@
     <Content Include="Views\Jogo\Edit.cshtml" />
     <Content Include="Views\Jogo\Index.cshtml" />
     <Content Include="Views\Jogo\RegistroEquipes.cshtml" />
+    <Content Include="Views\Equipe\Create.cshtml" />
+    <Content Include="Views\Equipe\Delete.cshtml" />
+    <Content Include="Views\Equipe\Details.cshtml" />
+    <Content Include="Views\Equipe\Edit.cshtml" />
+    <Content Include="Views\Equipe\Index.cshtml" />
+    <Content Include="Views\Equipe\Registrar.cshtml" />
     <None Include="Views\Jogo\_Equipe.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
