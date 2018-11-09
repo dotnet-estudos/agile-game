@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Data.Contexto;
 using Domain.Entidade;
+using Microsoft.Ajax.Utilities;
+using Web.Common;
 
 namespace Web.Controllers
 {
@@ -97,9 +99,18 @@ namespace Web.Controllers
 
 
 
-        public ActionResult Registrar()
+        public ActionResult Registrar(string id)
         {
-            return View();
+            if (id.IsNullOrWhiteSpace())
+            {
+                return View();
+            }
+            var equipEdit = db.Equipe.FirstOrDefault(x => x.Hash.Equals(id));
+            if (equipEdit.Nome.IsNullOrWhiteSpace())
+            {
+                return View(equipEdit).Mensagem("Registre o Nome da Equipe");
+            }
+            return RedirectToAction("Board", "Jogo", id);
         }
 
 

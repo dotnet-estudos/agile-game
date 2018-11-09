@@ -11,6 +11,6 @@ namespace Domain.Entidade
 
         public bool Ativo { get; set; }
 
-        public IEnumerable<Fase> Fases { get; set; }
+        public List<Fase> Fases { get; set; }
     }
 }

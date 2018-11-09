@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using Data.Contexto;
 using Domain.Entidade;
+using Microsoft.Ajax.Utilities;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -35,6 +37,35 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
+            return View(jogo);
+        }
+
+
+        // GET: Jogo/Details/5
+        public ActionResult Board(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Jogo jogo = db.Jogo
+                .Include(x=>x.Equipes)
+                .Include(x=>x.Board)
+                .Include(x=>x.Board.Fases)
+                .FirstOrDefault(x=>x.Equipes.Any(y=>y.Hash.Equals(id)));
+            
+
+            if (jogo == null)
+            {
+                return HttpNotFound();
+            }
+
+             jogo.Equipes = jogo.Equipes.Where(x => x.Hash.Equals(id)).ToList();
+
+
+            if (jogo.Equipes.Any(x => x.Hash.Equals(id) && x.Nome.IsNullOrWhiteSpace()))
+                return RedirectToAction("Registrar", "Equipe", id);
+
             return View(jogo);
         }
 

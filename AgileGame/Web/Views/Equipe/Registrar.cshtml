@@ -12,7 +12,7 @@
 
 
         <div class="col-sm-4">
-            <div class="card  text-white mb-3 bg-primary">
+            <div class="card  text-white mb-4 bg-primary">
                 <div class="card-header">Escolha Sua Equipe e Registre o Nome do Seu time</div>
                 <div class="card-body bg-light text-dark">
                     Hash:
@@ -20,10 +20,7 @@
                         @Html.EditorFor(model => model.Hash, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Hash, "", new { @class = "text-danger" })
                     </div>
-
-
                     <p class="card-text text-dark">
-
                         Nome:
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })

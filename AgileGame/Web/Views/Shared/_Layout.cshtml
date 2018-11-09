@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Consultar CPF</title>
+    <title>@ViewBag.Title - AgileGame</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -14,6 +14,9 @@
     <link rel="stylesheet" type="text/css" href="/Content/normalize.css" />
     <link rel="stylesheet" type="text/css" href="/Content/demo.css" />
     <link rel="stylesheet" type="text/css" href="/Content/component1.css" />
+    <link href="~/Content/fa/css/all.css" rel="stylesheet" />
+
+
     <script src="/Scripts/modernizr-2.6.2.min.js"></script>
 
 </head>
@@ -52,12 +55,18 @@
             <button class="cn-button" id="cn-button">+</button>
             <div class="cn-wrapper" id="cn-wrapper">
                 <ul>
-                    <li><a href="#"><span class="icon-male"></span></a></li>
-                    <li><a href="#"><span class="icon-group"></span></a></li>
-                    <li><a href="#"><span class="icon-home"></span></a></li>
-                    <li><a href="#"><span class="icon-facetime-video"></span></a></li>
-                    <li><a href="#"><span class="icon-envelope-alt"></span></a></li>
-                    
+                    <li><a href="~/Jogo"><i title="Jogo" class="fas fa-gamepad"></i></a></li>
+                    <li><a href="~/Equipe"><i title="Equipes" class="fas fa-users"></i></a></li>
+                    <li><a href="~/Home"><i title="Home" class="fas fa-home"></i></a></li>
+                    <li><a href="~/DashBoad"><i title="Dash Board" class="fas fa-chart-area"></i></a></li>
+                    <li><a href="~/Resultado"><i title="Resultados" class="fas fa-chalkboard-teacher"></i></a></li>
+
+                    @*<li><a href="#">Jogo</a></li>
+                    <li><a href="#">Equipe</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Board</a></li>
+                    <li><a href="#">Nada</a></li>*@
+
                 </ul>
             </div>
             <div id="cn-overlay" class="cn-overlay"></div>

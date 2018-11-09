@@ -73,6 +73,8 @@ namespace Data.Migrations
                     Nome = "Backlog",
                     Ordem = 0,
                     RGB = "#1E90FF",
+                    NomeAbreviado = "Bklog",
+                    FaIcon = @"<i class='fas fa-clipboard-list'></i>"
                 },
                 new Fase()
                 {
@@ -82,6 +84,8 @@ namespace Data.Migrations
                     Nome = "Desenvolvimento",
                     Ordem = 1,
                     RGB = "#3CB371",
+                    NomeAbreviado = "Dev",
+                    FaIcon = @"<i class='fas fab fa-dev'></i>"
                 },
                 new Fase()
                 {
@@ -91,6 +95,8 @@ namespace Data.Migrations
                     Nome = "Pre-Homologação",
                     Ordem = 2,
                     RGB = "#FF6347",
+                    NomeAbreviado = "P-Hml",
+                    FaIcon = @"<i class='fas fa-clipboard-check'></i>"
                 },
                 new Fase()
                 {
@@ -100,6 +106,8 @@ namespace Data.Migrations
                     Nome = "Homologação",
                     Ordem = 3,
                     RGB = "#D3D3D3",
+                    NomeAbreviado = "Hml",
+                    FaIcon = @"<i class='fas fa-clipboard-check'></i>"
                 },
                 new Fase()
                 {
@@ -109,6 +117,8 @@ namespace Data.Migrations
                     Nome = "Deploy",
                     Ordem = 4,
                     RGB = "#FFEFD5",
+                    NomeAbreviado = "Dep",
+                     FaIcon = @"<i class='fab fa-deploydog'></i>",
                 },
                 new Fase()
                 {
@@ -118,6 +128,8 @@ namespace Data.Migrations
                     Nome = "Produção",
                     Ordem = 5,
                     RGB = "#D8BFD8",
+                    NomeAbreviado = "Prd",
+                    FaIcon = @"<i class='fab fa-product-hunt'></i>"
                 }
                 );
         }
