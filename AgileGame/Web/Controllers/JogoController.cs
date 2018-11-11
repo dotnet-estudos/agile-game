@@ -11,6 +11,7 @@ using Data.Contexto;
 using Domain.Entidade;
 using Microsoft.Ajax.Utilities;
 using Web.Models;
+using WebGrease.Css.Extensions;
 
 namespace Web.Controllers
 {
@@ -48,19 +49,38 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Jogo jogo = db.Jogo
                 .Include(x=>x.Equipes)
                 .Include(x=>x.Board)
                 .Include(x=>x.Board.Fases)
+                .Include(x=>x.LancamentoBoard)
+                .Include(x => x.LancamentoChamado)
+                .Include(x => x.LancamentoKaizen)
                 .FirstOrDefault(x=>x.Equipes.Any(y=>y.Hash.Equals(id)));
-            
 
+
+            var listSemanas = new List<SemanaCombo>();
+
+            for (int i = 1; i < (50/7); i++)
+            {
+                listSemanas.Add(new SemanaCombo{ Dia = i*7, Semana = i.ToString("Semana ##")});
+            }
+            
             if (jogo == null)
             {
                 return HttpNotFound();
             }
 
-             jogo.Equipes = jogo.Equipes.Where(x => x.Hash.Equals(id)).ToList();
+            var ultimaSemana = 0;
+            foreach (var dia in jogo.LancamentoBoard.OrderByDescending(x => x.DiaLancamento).Select(x => x.DiaLancamento))
+            {
+                ultimaSemana = dia;
+            }
+
+            ViewBag.SemanaDia = new SelectList(listSemanas, "Dia", "Semana", ultimaSemana);
+
+            jogo.Equipes = jogo.Equipes.Where(x => x.Hash.Equals(id)).ToList();
 
 
             if (jogo.Equipes.Any(x => x.Hash.Equals(id) && x.Nome.IsNullOrWhiteSpace()))
