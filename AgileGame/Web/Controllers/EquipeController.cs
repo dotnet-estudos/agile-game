@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Data.Contexto;
 using Domain.Entidade;
 using Microsoft.Ajax.Utilities;
@@ -130,7 +131,7 @@ namespace Web.Controllers
                 db.Entry(equipEdit).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Board", "Jogo",new {id= equipe.Hash});
 
             // ViewBag.JogoId = new SelectList(db.Jogo, "JogoId", "NomeTurma", equipe.JogoId);
             return View();

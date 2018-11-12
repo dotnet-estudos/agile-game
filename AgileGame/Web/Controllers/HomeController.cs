@@ -20,24 +20,49 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            /*
+            Global.Instance.CarregarParametros(ConfigurationManager.AppSettings);
+
+            var resultglobal = Global.Instance.ConsultaCpfLista("84118040549");
+           */
+            if (Session["Usuario"] != null)
+            {
+                var mensage = Session["Mensagem"];
+
+                if (mensage != null)
+                {
+                    var men = (Mensagem)mensage;
+
+                    Session["Mensagem"] = null;
+
+                    if (men.Erro)
+                    {
+                        return View("Index").MensagemErro(men.Mensage);
+                    }
+                    else
+                    {
+                        return View("Index").MensagemSucesso(men.Mensage);
+                    }
+
+                }
+
+
+                return View("Index");
+            } 
+
+
+            return View("Login");
+
+           
         }
 
-        public ActionResult About()
+
+
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View("Login");
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-
 
         [HttpPost]
         public ActionResult Login(LoginViewModel pLogin)
@@ -47,11 +72,11 @@ namespace Web.Controllers
             var lUsuario = new Usuario
             {
                 Login = pLogin.Login,
-                Senha = pLogin.Senha
+                Senha = CriarMd5.Criptografar(pLogin.Senha)
             };
 
             var usuario =
-                db.Usuarios.FirstOrDefault(x => x.Login.Equals(lUsuario.Login) && x.Senha.Equals(CriarMd5.Criptografar(lUsuario.Senha)));
+                db.Usuarios.FirstOrDefault(x => x.Login.Equals(lUsuario.Login) && x.Senha.Equals(lUsuario.Senha));
 
             if (usuario == null)
                 return RedirectToAction("Login", "Home").MensagemErro("Falha na Autenticação, usuário e/ou senha inválido(s).");

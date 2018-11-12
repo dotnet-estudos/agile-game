@@ -3,10 +3,12 @@
 
 <div>
     <h4>Jogo Da Turma: @Model.NomeTurma</h4>
-    <hr/>
+    <hr />
+    <h4>use a Url: @Url.Action("Registrar", "Equipe") Para Registar Sua Equipe </h4>
+    <hr />
     @*<h4>Use o Hash para Registar a Turma: @Model.Hash</h4>
-    <hr/>
-    <h4>@Url.Action("Registrar","Equipe", Model.Hash)  </h4>*@
+        <hr/>
+        <h4>@Url.Action("Registrar","Equipe", Model.Hash)  </h4>*@
 </div>
 
 @{
@@ -14,9 +16,9 @@
         @foreach (var equipe in Model.Equipes)
         {
 
-        <div class="col-md-4 col-sm-1">
-            @Html.Partial("_Equipe", equipe)
-        </div>
+            <div class="col-md-4 col-sm-1">
+                @Html.Partial("_Equipe", equipe)
+            </div>
 
         }
     </div>

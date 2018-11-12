@@ -1,6 +1,10 @@
 ﻿@using Data.Migrations
 @model Domain.Entidade.Jogo
 
+<h2>Board do time: @Model.Equipes.FirstOrDefault().Nome</h2>
+<hr/>
+
+
 @Html.ValidationMessage("SemanaDia", "", new { @class = "text-danger" })
 <div class="container">
     <div class="row">

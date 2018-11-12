@@ -25,7 +25,7 @@ namespace Web.Controllers
             var jogo = db.Jogo
                 .Include(x => x.Equipes)
                 .Include(x => x.Board);
-            return View(jogo.ToList());
+            return View(jogo.ToList().OrderByDescending(x=>x.JogoId));
         }
 
         // GET: Jogo/Details/5
@@ -133,7 +133,7 @@ namespace Web.Controllers
                         .ToUpper();
                 db.Jogo.Add(jogo);
                 db.SaveChanges();
-                return View("RegistroEquipes", jogo);
+                return RedirectToAction("RegistroEquipes", jogo.JogoId);
             }
 
             ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);

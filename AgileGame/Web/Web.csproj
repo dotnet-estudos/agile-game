@@ -40,6 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -165,6 +166,7 @@
     <Compile Include="Models\BoardViewModel.cs" />
     <Compile Include="Models\LancamentoKaizenViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\Mensagem.cs" />
     <Compile Include="Models\SemanaCombo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1645,6 +1647,7 @@
     <Content Include="Content\img\rh_marcio.jpg" />
     <Content Include="Content\img\rh_marcio2.jpg" />
     <Content Include="Content\img\usuario.png" />
+    <Content Include="Content\login_teste.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\sweetalert2.min.css" />
@@ -1738,6 +1741,7 @@
     <Content Include="fonts\awnsome\fa-brands-400.ttf" />
     <Content Include="fonts\awnsome\fa-brands-400.woff" />
     <Content Include="fonts\awnsome\fa-brands-400.woff2" />
+    <None Include="Properties\PublishProfiles\Localhost-normal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\comprasnet.utils.js" />
     <Content Include="Scripts\demo1.js" />
@@ -1811,6 +1815,7 @@
     <Content Include="Views\Board\Details.cshtml" />
     <Content Include="Views\Board\Edit.cshtml" />
     <Content Include="Views\Board\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Views\Jogo\_Equipe.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

@@ -25,7 +25,7 @@ namespace Data.Migrations
                 {
                     Email = "master@agilegame.local",
                     Login = "master",
-                    Senha = "1c26d3784673de807d2c74bfbbade7f5",
+                    Senha = "be7ba16932f2407bbccf6384c03dcdfb", //agilegame01
                     UsuarioId = 1,
                     Ativo = true
                 });
