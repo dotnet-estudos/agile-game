@@ -62,6 +62,14 @@
     <Compile Include="Migrations\201811091943198_AlteracaoFase.Designer.cs">
       <DependentUpon>201811091943198_AlteracaoFase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811120342086_Atualizacao_beta.cs" />
+    <Compile Include="Migrations\201811120342086_Atualizacao_beta.Designer.cs">
+      <DependentUpon>201811120342086_Atualizacao_beta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811120352310_hash_turma.cs" />
+    <Compile Include="Migrations\201811120352310_hash_turma.Designer.cs">
+      <DependentUpon>201811120352310_hash_turma.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,6 +107,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811091943198_AlteracaoFase.resx">
       <DependentUpon>201811091943198_AlteracaoFase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811120342086_Atualizacao_beta.resx">
+      <DependentUpon>201811120342086_Atualizacao_beta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811120352310_hash_turma.resx">
+      <DependentUpon>201811120352310_hash_turma.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Domain.Entidade.LancamentoChamado>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChamadoNumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaAbertura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaFechamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Equipe.Hash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jogo.NomeTurma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChamadoNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaAbertura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaFechamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCadastro)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LancamentoChamadoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LancamentoChamadoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LancamentoChamadoId })
+        </td>
+    </tr>
+}
+
+</table>

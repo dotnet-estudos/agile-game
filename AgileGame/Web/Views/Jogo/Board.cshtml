@@ -1,50 +1,186 @@
-﻿@model Domain.Entidade.Jogo
+﻿@using Data.Migrations
+@model Domain.Entidade.Jogo
+
+@Html.ValidationMessage("SemanaDia", "", new { @class = "text-danger" })
 <div class="container">
     <div class="row">
-        <div class="card-group col-12">
-            @foreach (var fase in Model.Board.Fases)
-            {
-                @Html.Partial("_Fase", fase)
-            }
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group">
-            @Html.Label("Semana: ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-12">
-                @Html.DropDownList("SemanaDia", null, htmlAttributes: new {@class = "form-control"})
-                @Html.ValidationMessage("SemanaDia", "", new {@class = "text-danger"})
+        <div id="conteudoBoard">
+            <div class="card-group col-12">
 
-            </div>
-            <div class="col align-self-end">
-                <input type="button" class="btn btn-primary" name="EnviarBoard" value="Enviar" />
+                @foreach (var fase in Model.Board.Fases)
+            {
+                    @Html.Partial("_Fase", fase)
+                }
             </div>
         </div>
     </div>
     <hr />
+    <form class="form-inline" role="form">
+        <label for="email2" class="mb-2 mr-sm-2">Semana:</label>
+        @Html.DropDownList("SemanaDia", null, htmlAttributes: new { @class = "form-control" })
+        <div class="col align-self-end">
+            <input type="button" class="btn btn-primary" id="EnviarBoard" name="EnviarBoard" onclick="enviarBoard();" value="Enviar" />
+        </div>
+    </form>
+    <hr />
     <div class="row">
         <div class="card-deck ">
-
-            <div class=" align-items-start">
-                <div class="card text-white bg-dark mb-3 col-md" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
+            <div class="align-self-start">
+                <div class="card text-white bg-dark mb-auto col-md" style="max-width: 18rem;">
+                    <div class="card-header">Ticket</div>
                     <div class="card-body">
-                        <h5 class="card-title">Dark card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <form class="form-inline" role="form">
+                            <label for="email2" class="mb-2 mr-sm-2">Ticket:</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="TicketNumero" maxlength="4" placeholder="ex: 99A" style="text-transform:uppercase">
+                            <label for="pwd2" class="mb-2 mr-sm-2">Inicio/Fim</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="DiaInicioFimTicket" placeholder="__/__">
+                            @Html.HiddenFor(model => model.Equipes.FirstOrDefault().EquipeId)
+                        </form>
                     </div>
-                    <div class="card-footer bg-transparent border-white">Footer</div>
+                    <div class="card-footer bg-transparent border-white">
+                        <input type="button" class="btn btn-secondary" id="EnviarTicket" onclick="enviarChamado();" name="EnviarTicket" value="Enviar" />
+                    </div>
                 </div>
             </div>
-
-            <div class="align-items-end">
+            <div class="align-self-end">
                 <div class="card text-white bg-info mb-3 col-md" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
+                    <div class="card-header">Kaizen</div>
                     <div class="card-body">
-                        <h5 class="card-title">Info card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <form class="form-inline" role="form" action="">
+                            <label for="email2" class="mb-2 mr-sm-2">Letra Kaizen:</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="LetraKaizen" maxlength="1" placeholder="ex: A" style="text-transform:uppercase">
+                            <label for="pwd2" class="mb-2 mr-sm-2">Inicio/Fim</label>
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="DiaInicioFimKaizen" placeholder="__/__">
+                            @Html.HiddenFor(model=> model.Equipes.FirstOrDefault().EquipeId)
+                        </form>
+                    </div>
+                    <div class="card-footer bg-transparent border-white">
+                        <input type="button" id="EnviarKaizen" onclick="enviarKaizen();" class="btn btn-secondary" name="EnviarKaizen" value="Enviar" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#DiaInicioFimTicket").mask("00/00");
+        $("#DiaInicioFimKaizen").mask("00/00");
+        $("#LetraKaizen").mask("S");
+        $("#TicketNumero").mask("00S");
+
+    });
+
+
+    function enviarBoard() {
+
+        var board = new Object();
+
+        board.Kaizen = new Object();
+        board.Equipe = new Object();
+        board.Jogo = new Object();
+        board.LancamentoBoard = new Array();
+
+
+        board.Jogo.JogoId = @Model.JogoId;
+        board.Equipe.EquipeId = $("#EquipeId").val();
+
+
+        $("#conteudoBoard input[data-idJogo=@Model.JogoId]").each(function() {
+
+            var LancamentoBoard = new Object();
+            LancamentoBoard.DiaLancamento    = document.getElementById("SemanaDia").value;
+            LancamentoBoard.FaseId = $(this).data("idfase");
+            LancamentoBoard.EquipeId         = board.Equipe.EquipeId;
+            LancamentoBoard.JogoId           = @Model.JogoId;
+            LancamentoBoard.Quantidade = $(this).val();
+
+
+            board.LancamentoBoard.push(LancamentoBoard);
+
+
+        });
+
+
+        enviar(board);
+    }
+
+
+
+    function enviarKaizen() {
+
+        var board = new Object();
+
+        board.Kaizen = new Object();
+        board.Equipe = new Object();
+        board.Jogo = new Object();
+        board.LancamentoKaizen = new Array();
+
+        board.Kaizen.Letra =$("#LetraKaizen").val();
+        board.Jogo.JogoId = @Model.JogoId;
+        board.Equipe.EquipeId = $("#EquipeId").val();
+
+        var LancamentoKaizen = new Object();
+        LancamentoKaizen.Letra = board.Kaizen.Letra;
+        LancamentoKaizen.JogoId = @Model.JogoId;
+        LancamentoKaizen.EquipeId = board.Equipe.EquipeId;
+        LancamentoKaizen.DiaConlcusao = $("#DiaInicioFimKaizen").val().split("/")[1];
+        LancamentoKaizen.DiaInicio = $("#DiaInicioFimKaizen").val().split("/")[0];
+
+
+        board.LancamentoKaizen.push(LancamentoKaizen);
+
+        enviar(board);
+    }
+
+    function enviarChamado() {
+
+        var board = new Object();
+
+        board.Kaizen = new Object();
+        board.Equipe = new Object();
+        board.Jogo = new Object();
+        board.LancamentoChamado = new Array();
+
+        //board.Kaizen.Letra =$("#LetraKaizen").val();
+        board.Jogo.JogoId = @Model.JogoId;
+        board.Equipe.EquipeId = $("#EquipeId").val();
+
+        var LancamentoChamado = new Object();
+        LancamentoChamado.ChamadoNumero = document.getElementById("TicketNumero").value;// $("#TicketNumero").va();
+        LancamentoChamado.DiaAbertura    =  $("#DiaInicioFimTicket").val().split("/")[0];
+        LancamentoChamado.DiaFechamento      = $("#DiaInicioFimTicket").val().split("/")[1];
+        LancamentoChamado.JogoId             =  @Model.JogoId;
+        LancamentoChamado.EquipeId           = board.Equipe.EquipeId;
+
+
+        board.LancamentoChamado.push(LancamentoChamado);
+
+        enviar(board);
+    }
+
+    function enviar(board) {
+        $.ajax({
+            url:"/Board/PutViewBoard/5",
+            type: 'PUT',
+            data: {board: board},
+            // dataType: 'json',
+            success: function(response, data) {
+                if(!response.status){
+                    comprasnet.alertErro(response.mensagem);
+                }
+                else
+                {
+                    comprasnet.alertSucesso(response.mensagem);
+                }
+
+            }
+        });
+
+
+    }
+
+</script>
+
+

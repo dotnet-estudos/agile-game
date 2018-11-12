@@ -1,0 +1,66 @@
+﻿@model Domain.Entidade.LancamentoChamado
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LancamentoChamado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipe.Hash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.NomeTurma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChamadoNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChamadoNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaAbertura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaAbertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaFechamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaFechamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LancamentoChamadoId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

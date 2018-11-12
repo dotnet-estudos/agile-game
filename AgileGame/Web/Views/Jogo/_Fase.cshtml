@@ -1,4 +1,9 @@
-﻿@model Domain.Entidade.Fase
+﻿@using Domain.Entidade
+@model Domain.Entidade.Fase
+
+@{
+    var jogo = (Jogo) ViewBag.JogoBag;
+}
 
 <div class="card text-light" style="background-color: @Model.RGB; text-shadow: 1px 1px #696969;">
     <div class="card-header d-none d-sm-block "> @Model.Nome</div>
@@ -7,7 +12,7 @@
         <h5 class="d-none d-sm-block">Quantidade: </h5>
         <h5 class="d-block d-sm-none">Qtd: </h5>
         <p class="card-text  ">
-            <input type="number" class="form-control col-md col-sm" />
+            <input type="number" id="fase_@Model.FaseId" data-idfase="@Model.FaseId" data-idjogo="@jogo.JogoId" data-idequipe="@jogo.Equipes.FirstOrDefault().EquipeId" class="form-control col-md col-sm" />
         </p>
     </div>
 </div>

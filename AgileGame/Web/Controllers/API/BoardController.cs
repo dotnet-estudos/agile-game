@@ -6,10 +6,14 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Security;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 using Data.Contexto;
 using Domain.Entidade;
+using Newtonsoft.Json;
+using Web.Models;
 
 namespace Web.Controllers.API
 {
@@ -55,6 +59,63 @@ namespace Web.Controllers.API
             try
             {
                 db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BoardExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // PUT: api/Boards/5
+        [ResponseType(typeof(void))]
+        [Route("api/Board/PutViewBoard")]
+        [HttpPut]
+        public IHttpActionResult GetViewBoard(int id, BoardViewModel board)
+        {
+
+            if (board.LancamentoKaizen != null && board.LancamentoKaizen.Count > 0)
+            {
+                var lancamentoKaizen = new LancamentoKaizen();
+
+                foreach (var item in board.LancamentoKaizen)
+                {
+                    lancamentoKaizen.DiaConlcusao = item.DiaConlcusao;
+                    lancamentoKaizen.DiaInicio = item.DiaInicio;
+                    lancamentoKaizen.JogoId = board.jogo.JogoId;
+                    var kaizen = db.Kaizen.FirstOrDefault(x => x.Letra.Equals(board.Kaizen.Letra));
+                    if (kaizen != null)
+                        lancamentoKaizen.KaizenId =
+                            kaizen.KaizenId;
+
+                    if (lancamentoKaizen.KaizenId == null)
+                    {
+
+                        return Content(HttpStatusCode.BadRequest, new {mensagem = "Kaizem Não Encontrado"});
+                    }
+                }
+
+                db.LancamentoKaizen.Add(lancamentoKaizen);
+
+
+            }
+
+
+            //db.Entry(board).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+
+                return Content(HttpStatusCode.OK, new { mensagem = "OK" });
             }
             catch (DbUpdateConcurrencyException)
             {

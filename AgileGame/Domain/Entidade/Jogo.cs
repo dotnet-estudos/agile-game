@@ -15,6 +15,8 @@ namespace Domain.Entidade
 
         public string NomeTurma { get; set; }
 
+        public string Hash { get; set; }
+
         public int QuantidadeEquipes { get; set; }
 
         public DateTime? DataCadastro { get; set; }

@@ -22,7 +22,9 @@ namespace Web.Controllers
         // GET: Jogo
         public ActionResult Index()
         {
-            var jogo = db.Jogo.Include(j => j.Board);
+            var jogo = db.Jogo
+                .Include(x => x.Equipes)
+                .Include(x => x.Board);
             return View(jogo.ToList());
         }
 
@@ -33,7 +35,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Jogo jogo = db.Jogo.Find(id);
+            Jogo jogo = db.Jogo
+                .Include(x => x.Equipes)
+                .Include(x => x.Board)
+                .Include(x => x.Board.Fases)
+                .Include(x => x.LancamentoBoard)
+                .Include(x => x.LancamentoChamado)
+                .Include(x => x.LancamentoKaizen)
+                .FirstOrDefault(x=>x.JogoId == id);
             if (jogo == null)
             {
                 return HttpNotFound();
@@ -59,6 +68,7 @@ namespace Web.Controllers
                 .Include(x => x.LancamentoKaizen)
                 .FirstOrDefault(x=>x.Equipes.Any(y=>y.Hash.Equals(id)));
 
+            ViewBag.JogoBag = jogo; 
 
             var listSemanas = new List<SemanaCombo>();
 
@@ -101,7 +111,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "JogoId,BoardId,NomeTurma,QuantidadeEquipes,DataCadastro,Finalizado,DataHoraFim")] Jogo jogo)
+        public ActionResult Create([Bind(Include = "JogoId,BoardId,NomeTurma,QuantidadeEquipes,DataCadastro,Finalizado,DataHoraFim,Hash")] Jogo jogo)
         {
             if (ModelState.IsValid)
             {
@@ -117,6 +127,10 @@ namespace Web.Controllers
                        
                    });
                 }
+                jogo.Hash =
+                    Regex.Replace(Convert.ToBase64String(Guid.NewGuid().ToByteArray()), "[^0-9a-zA-Z]+", "")
+                        .Substring(1, 5)
+                        .ToUpper();
                 db.Jogo.Add(jogo);
                 db.SaveChanges();
                 return View("RegistroEquipes", jogo);

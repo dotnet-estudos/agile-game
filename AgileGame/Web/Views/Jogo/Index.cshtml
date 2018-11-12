@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Domain.Entidade.Jogo>
+﻿@using System.Collections.Concurrent
+@model IEnumerable<Domain.Entidade.Jogo>
 
 @{
     ViewBag.Title = "Index";
@@ -29,6 +30,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DataHoraFim)
         </th>
+        <th>
+            @Html.DisplayName("Qtd. Equipes")
+        </th>
         <th></th>
     </tr>
 
@@ -53,9 +57,13 @@
             @Html.DisplayFor(modelItem => item.DataHoraFim)
         </td>
         <td>
+            @String.Format("{0}",item.Equipes.Count().ToString("##"))
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.JogoId }) |
             @Html.ActionLink("Details", "Details", new { id=item.JogoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.JogoId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.JogoId })  |
+            @Html.ActionLink("Regitro Equipes", "RegistroEquipes", new { id = item.JogoId })
         </td>
     </tr>
 }

@@ -15,5 +15,15 @@ namespace Web.Models
 
         public Jogo jogo { get; set; }
 
+        public Kaizen Kaizen { get; set; }
+
+        public List<LancamentoKaizen> LancamentoKaizen { get; set; }
+
+        public List<LancamentoBoard> LancamentoBoard { get; set; }
+
+        public List<LancamentoChamado> LancamentoChamado { get; set; }
+
+
+
     }
 }

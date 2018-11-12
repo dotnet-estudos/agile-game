@@ -1,0 +1,58 @@
+﻿@model Domain.Entidade.LancamentoBoard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LancamentoBoard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipe.Hash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fase.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fase.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.NomeTurma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaLancamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaLancamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LancamentoBoardId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

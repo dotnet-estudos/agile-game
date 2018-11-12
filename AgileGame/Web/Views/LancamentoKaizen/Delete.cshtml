@@ -1,0 +1,64 @@
+﻿@model Domain.Entidade.LancamentoKaizen
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LancamentoKaizen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipe.Hash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.NomeTurma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kaizen.Letra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kaizen.Letra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaConlcusao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaConlcusao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaInicio)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

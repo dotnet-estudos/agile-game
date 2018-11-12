@@ -13,7 +13,8 @@ namespace Web
 
 	     bundles.Add(new ScriptBundle("~/bundles/compras").Include(
                         "~/Scripts/sweetalert2.min.js",
-                        "~/Scripts/comprasnet.utils.js"
+                        "~/Scripts/comprasnet.utils.js",
+                        "~/Scripts/jquery.mask.js"
                         ));
 
 

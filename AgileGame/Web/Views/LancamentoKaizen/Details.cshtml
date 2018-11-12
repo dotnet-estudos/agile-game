@@ -1,0 +1,58 @@
+﻿@model Domain.Entidade.LancamentoKaizen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LancamentoKaizen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipe.Hash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.NomeTurma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kaizen.Letra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kaizen.Letra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaConlcusao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaConlcusao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaInicio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LancamentoKaizenId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

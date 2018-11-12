@@ -1,8 +1,12 @@
-﻿@model Domain.Entidade.Jogo
+﻿@using System.Runtime.InteropServices
+@model Domain.Entidade.Jogo
 
 <div>
     <h4>Jogo Da Turma: @Model.NomeTurma</h4>
-    <hr />
+    <hr/>
+    @*<h4>Use o Hash para Registar a Turma: @Model.Hash</h4>
+    <hr/>
+    <h4>@Url.Action("Registrar","Equipe", Model.Hash)  </h4>*@
 </div>
 
 @{

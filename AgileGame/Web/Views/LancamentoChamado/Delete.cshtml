@@ -1,0 +1,72 @@
+﻿@model Domain.Entidade.LancamentoChamado
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LancamentoChamado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipe.Hash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jogo.NomeTurma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChamadoNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChamadoNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaAbertura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaAbertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaFechamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaFechamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

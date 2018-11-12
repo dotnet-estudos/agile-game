@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Domain.Entidade.LancamentoKaizen>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Equipe.Hash)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jogo.NomeTurma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kaizen.Letra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaConlcusao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaInicio)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Equipe.Hash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jogo.NomeTurma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kaizen.Letra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaConlcusao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaInicio)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LancamentoKaizenId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LancamentoKaizenId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LancamentoKaizenId })
+        </td>
+    </tr>
+}
+
+</table>
