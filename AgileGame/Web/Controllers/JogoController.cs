@@ -7,6 +7,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Data.Contexto;
 using Domain.Entidade;
 using Microsoft.Ajax.Utilities;
@@ -133,7 +134,7 @@ namespace Web.Controllers
                         .ToUpper();
                 db.Jogo.Add(jogo);
                 db.SaveChanges();
-                return RedirectToAction("RegistroEquipes", jogo.JogoId);
+                return RedirectToAction("RegistroEquipes", new {id = jogo.JogoId});
             }
 
             ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome", jogo.BoardId);
