@@ -11,16 +11,20 @@ using System.Web.Routing;
 using Data.Contexto;
 using Domain.Entidade;
 using Microsoft.Ajax.Utilities;
+using Web.Common;
 using Web.Models;
 using WebGrease.Css.Extensions;
 
 namespace Web.Controllers
 {
-    public class JogoController : Controller
+    [Authorize]
+    public class JogoController : BaseController
     {
         private AgileGameContexto db = new AgileGameContexto();
 
+        
         // GET: Jogo
+        
         public ActionResult Index()
         {
             var jogo = db.Jogo
@@ -29,7 +33,9 @@ namespace Web.Controllers
             return View(jogo.ToList().OrderByDescending(x=>x.JogoId));
         }
 
+
         // GET: Jogo/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,18 +47,24 @@ namespace Web.Controllers
                 .Include(x => x.Board)
                 .Include(x => x.Board.Fases)
                 .Include(x => x.LancamentoBoard)
+                .Include(x => x.LancamentoBoard.Select(y=>y.Fase))
                 .Include(x => x.LancamentoChamado)
                 .Include(x => x.LancamentoKaizen)
+                .Include(x => x.LancamentoKaizen.Select(y => y.Kaizen))
                 .FirstOrDefault(x=>x.JogoId == id);
             if (jogo == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.fases = jogo.Board.Fases;
+
             return View(jogo);
         }
 
-
+        
         // GET: Jogo/Details/5
+        [AllowAnonymous]
         public ActionResult Board(string id)
         {
             if (id == null)
@@ -95,21 +107,54 @@ namespace Web.Controllers
 
 
             if (jogo.Equipes.Any(x => x.Hash.Equals(id) && x.Nome.IsNullOrWhiteSpace()))
-                return RedirectToAction("Registrar", "Equipe", id);
+                return RedirectToAction("Registrar", "Equipe", new {id});
 
             return View(jogo);
         }
 
+        public ActionResult _LancamentoBoard(int id)
+        {
+            var returno = db.LancamentoBoard
+                .Include(x=>x.Jogo.Board.Fases)
+                .Include(x=>x.Equipe)
+                .Where(x => x.EquipeId == id).ToList();
+
+            if (returno == null || returno.Count == 0)
+            {
+                Equipe firstOrDefault = db.Equipe.FirstOrDefault(x => x.EquipeId == id);
+                if (firstOrDefault != null)
+                {
+                    var eq = firstOrDefault.JogoId;
+                    return RedirectToAction("Details",new { id=eq}).MensagemErro("Board Não foi Encontrado");
+                }
+                return RedirectToAction("index").MensagemErro("Board Não foi Encontrado");
+            }
+
+
+            var boardId = returno.Select(x => x.Jogo.BoardId).First();
+
+            var listFases = db.Fase.Where(x => x.BoardId == boardId).ToList();
+
+            ViewBag.Fases = listFases;
+
+            if(Request.IsAjaxRequest())
+            return PartialView(returno);
+
+            return View(returno);
+        }
         // GET: Jogo/Create
+        
         public ActionResult Create()
         {
             ViewBag.BoardId = new SelectList(db.Board, "BoardId", "Nome");
             return View();
         }
 
+
         // POST: Jogo/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "JogoId,BoardId,NomeTurma,QuantidadeEquipes,DataCadastro,Finalizado,DataHoraFim,Hash")] Jogo jogo)
@@ -141,6 +186,7 @@ namespace Web.Controllers
             return View(jogo);
         }
 
+        [AllowAnonymous]
         public ActionResult RegistroEquipes(int id)
         {
             var jogo = db.Jogo.Include(x=>x.Equipes).FirstOrDefault(x => x.JogoId == id);
@@ -168,6 +214,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Edit([Bind(Include = "JogoId,BoardId,NomeTurma,QuantidadeEquipes,DataCadastro,Finalizado,DataHoraFim")] Jogo jogo)
         {
             if (ModelState.IsValid)
@@ -181,6 +228,7 @@ namespace Web.Controllers
         }
 
         // GET: Jogo/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -198,6 +246,7 @@ namespace Web.Controllers
         // POST: Jogo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+
         public ActionResult DeleteConfirmed(int id)
         {
             Jogo jogo = db.Jogo.Find(id);

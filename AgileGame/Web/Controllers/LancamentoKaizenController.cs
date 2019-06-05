@@ -11,7 +11,8 @@ using Domain.Entidade;
 
 namespace Web.Controllers
 {
-    public class LancamentoKaizenController : Controller
+    [Authorize]
+    public class LancamentoKaizenController : BaseController
     {
         private AgileGameContexto db = new AgileGameContexto();
 

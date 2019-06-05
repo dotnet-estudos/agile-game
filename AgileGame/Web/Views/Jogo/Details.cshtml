@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+
 }
 
 <h2>Details</h2>
@@ -72,10 +73,19 @@
         <th>
             @Html.DisplayName("Nome")
         </th>
+        <th>
+            @Html.DisplayName("Lead Time")
+        </th>
+        <th>
+            @Html.DisplayName("Esforco Kaizen")
+        </th>
+        <th>
+            @Html.DisplayName("Ranking")
+        </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Equipes)
+    @foreach (var item in Model.Equipes.ToList().OrderByDescending(x=>x.GetRankValue()))
     {
         <tr>
             <td>
@@ -88,10 +98,24 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EquipeId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.EquipeId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.EquipeId })
+                @item.GetLeadTime()
             </td>
+            <td>
+                @item.GetEsforcoKaizen()
+            </td>
+            <td>
+               <i title="@item.GetRankValuePercent().ToString("##.##")%">@item.GetRankValue().ToString("##.###")</i> 
+            </td>
+            <td>
+                @Html.ActionLink("Board", "_LancamentoBoard", new { id = item.EquipeId }, htmlAttributes: new { @class="btn btn-primary"})  |
+                @*<input type="button" class="btn btn-primary" name="name" value="Board" onclick=" ShowLancamentoBoard(@item.EquipeId); "/>*@
+                @*@Html.ActionLink("Edit", "Edit", "Equipe", new {id = item.EquipeId}) |
+                @Html.ActionLink("Details", "Details", "Equipe", new {id = item.EquipeId}) |*@
+
+            </td>
+            @*<div data-mostra="false" id="BackLog_@item.EquipeId">
+                @Html.Partial("_LancamentoBoard", item.LancamentoBoard)
+            </div>*@
         </tr>
     }
 
@@ -103,3 +127,22 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.JogoId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<script>
+    $(document).ready(function() {
+        $("div[data-mostra=false]").hide();
+
+        comprasnet.showModal("Lancamento Board", true, "Olha eu Aew");
+    });
+
+    function ShowLancamentoBoard(id) {
+        $.get("@Url.Action("_LancamentoBoard")/"+id, function(response) {
+            if (response) {
+                comprasnet.showModal("Board", false, response);
+            } else {
+                comprasnet.alertAtencao("Não foi possivel carregar board: " + response);
+            }
+        })
+    }
+</script>

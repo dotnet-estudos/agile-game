@@ -14,7 +14,7 @@ using Web.Common;
 
 namespace Web.Controllers
 {
-    public class EquipeController : Controller
+    public class EquipeController : BaseController
     {
         private AgileGameContexto db = new AgileGameContexto();
 
@@ -99,7 +99,7 @@ namespace Web.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public ActionResult Registrar(string id)
         {
             if (id.IsNullOrWhiteSpace())
@@ -111,7 +111,7 @@ namespace Web.Controllers
             {
                 return View(equipEdit).Mensagem("Registre o Nome da Equipe");
             }
-            return RedirectToAction("Board", "Jogo", id);
+            return RedirectToAction("Board", "Jogo", new { id});
         }
 
 
@@ -121,6 +121,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult Registrar([Bind(Include = "EquipeId,Hash,Nome,JogoId")] Equipe equipe)
         {
 

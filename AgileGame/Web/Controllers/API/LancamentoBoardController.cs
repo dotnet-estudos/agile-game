@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Data.Contexto;
 using Domain.Entidade;
+using Microsoft.Ajax.Utilities;
 
 namespace Web.Controllers.API
 {
@@ -21,6 +22,39 @@ namespace Web.Controllers.API
         public IQueryable<LancamentoBoard> GetLancamentoBoard()
         {
             return db.LancamentoBoard;
+        }
+
+
+        public object Get(string time, int jogo)
+        {
+            var lancamentos = db.LancamentoBoard
+                                .Include(x => x.Fase)
+                                .Include(x => x.Jogo)
+                                .Include(x => x.Equipe)
+                                .Where(x => x.JogoId == jogo)
+                                .Where(x => time == null || x.Equipe.Hash.Equals(time)).ToList();
+
+            var Dias = lancamentos.Select(x => x.DiaLancamento).Distinct().ToArray();
+
+            var fases = db.Jogo.Include(x => x.Board)
+                        .Include(x => x.Board.Fases)
+                        .FirstOrDefault(x => x.JogoId == jogo)
+                        .Board.Fases.ToList();
+
+
+            var serie = new List<object>();
+
+            fases.ForEach(fase =>
+            {
+                var count = Dias.Select(dia => lancamentos.Where(x => x.DiaLancamento <= dia && x.FaseId == fase.FaseId).Sum(x=>x.Quantidade)).ToArray();
+
+                serie.Add(new { name=fase.Nome, data = count, color= fase.RGB  });
+
+            });
+            
+            var retorno = new { dias = Dias, fases = fases.Select(x=> new { x.FaseId, x.Nome }), serie = serie };
+
+            return retorno;
         }
 
         // GET: api/LancamentoBoards/5

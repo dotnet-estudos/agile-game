@@ -6,8 +6,18 @@
     <div class="card-body">
         <h5 class="card-title">@Html.DisplayFor(model => model.Hash)</h5>
         <p class="card-text">
-            
             @Html.DisplayFor(model => model.Nome)
         </p>
+        <div class="text-center">
+            @if (Model.Nome == null)
+            {
+                <img src='https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=@string.Format("{0}{1}", Request.Url.ToString().Replace(Request.Url.AbsolutePath.ToString(), ""), Url.Action("Registrar", "Equipe", new {id = Model.Hash}))'>
+            }
+            else
+            {                
+                    <img src='https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=@string.Format("{0}{1}", Request.Url.ToString().Replace(Request.Url.AbsolutePath.ToString(), ""), Url.Action("Board", "Jogo", new {id = Model.Hash } ))'>
+            }
+        </div>
+
     </div>
 </div>

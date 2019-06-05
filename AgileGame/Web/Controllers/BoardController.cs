@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.Http;
-using System.Web.Http.Description;
 using System.Web.Mvc;
-using System.Web.UI.WebControls.Adapters;
 using Data.Contexto;
 using Domain.Entidade;
+using Domain.Util;
 using Web.Models;
+
 
 namespace Web.Controllers
 {
-    public class BoardController : Controller
+    
+    public class BoardController : BaseController
     {
         private AgileGameContexto db = new AgileGameContexto();
 
@@ -51,7 +49,7 @@ namespace Web.Controllers
         // POST: Board/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BoardId,Nome,Ativo")] Board board)
         {
@@ -83,7 +81,7 @@ namespace Web.Controllers
         // POST: Board/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BoardId,Nome,Ativo")] Board board)
         {
@@ -95,16 +93,16 @@ namespace Web.Controllers
             }
             return View(board);
         }
-
-
-       
         
-        [System.Web.Mvc.Route("/Board/PutViewBoard")]
-        [System.Web.Mvc.HttpPut]
-        public JsonResult PutViewBoard(int id, BoardViewModel board)
+
+        //[Route("/Board/PutViewBoard")]
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult Put(BoardViewModel board)
         {
 
             #region LancamentoKaizen    
+            
             if (board.LancamentoKaizen != null && board.LancamentoKaizen.Count > 0)
             {
                 
@@ -229,11 +227,7 @@ namespace Web.Controllers
 
             return Json(HttpStatusCode.NoContent);
         }
-
-
-
-
-
+        
         // GET: Board/Delete/5
         public ActionResult Delete(int? id)
         {

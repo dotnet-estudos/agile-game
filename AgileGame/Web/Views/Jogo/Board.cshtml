@@ -166,8 +166,8 @@
 
     function enviar(board) {
         $.ajax({
-            url:"/Board/PutViewBoard/5",
-            type: 'PUT',
+            url:"@Url.Action("Put", "Board")",
+            type: 'POST',
             data: {board: board},
             // dataType: 'json',
             success: function(response, data) {

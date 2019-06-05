@@ -12,7 +12,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         private AgileGameContexto db = new AgileGameContexto();
@@ -47,7 +47,8 @@ namespace Web.Controllers
                 }
 
 
-                return View("Index");
+                //return View("Index");
+                return RedirectToAction("Index", "Jogo");
             } 
 
 
@@ -57,7 +58,7 @@ namespace Web.Controllers
         }
 
 
-
+        [AllowAnonymous]
         public ActionResult Login()
         {
 
@@ -65,6 +66,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(LoginViewModel pLogin)
         {
             FormsAuthentication.Initialize();
@@ -93,6 +95,7 @@ namespace Web.Controllers
         /// Processa o Logout do site.
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
@@ -119,5 +122,7 @@ namespace Web.Controllers
             Response.Cookies.Add(authCookie);
             FormsAuthentication.SetAuthCookie(usuario.Login, true);
         }
+
+      
     }
 }
