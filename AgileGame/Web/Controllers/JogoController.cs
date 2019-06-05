@@ -112,6 +112,28 @@ namespace Web.Controllers
             return View(jogo);
         }
 
+        public ActionResult BoardsEquipe(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Jogo jogo = db.Jogo
+                .Include(x => x.Equipes)
+                .Include(x => x.Board)
+                .Include(x => x.Board.Fases)
+                .Include(x => x.LancamentoBoard)
+                .Include(x => x.LancamentoChamado)
+                .Include(x => x.LancamentoKaizen)
+                .Include(x => x.LancamentoKaizen.Select(y=>y.Kaizen))
+                .FirstOrDefault(x => x.JogoId == id);
+
+            ViewBag.JogoBag = jogo;
+
+            return View(jogo);
+        }
+
         public ActionResult _LancamentoBoard(int id)
         {
             var returno = db.LancamentoBoard

@@ -385,6 +385,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\ErrorHandler\Index.cshtml" />
     <Content Include="Views\ErrorHandler\NotFound.cshtml" />
+    <Content Include="Views\Jogo\BoardsEquipe.cshtml" />
     <None Include="Views\Jogo\_Equipe.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

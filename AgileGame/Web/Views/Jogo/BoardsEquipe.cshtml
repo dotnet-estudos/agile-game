@@ -1,0 +1,52 @@
+﻿@model Domain.Entidade.Jogo
+
+<div class="row">
+    @foreach (var equipe in Model.Equipes.OrderByDescending(x => x.GetRankValue()))
+    {
+        int indexHank = Model.Equipes.OrderByDescending(x => x.GetRankValue()).ToList().IndexOf(equipe)+1;
+
+        <div class="col-12">
+                <label class="gerarCFD" data-time="@equipe.Hash" data-jogo="@equipe.JogoId" data-dados='@String.Format("equipe_{0}", equipe.EquipeId)'> @Html.Raw(string.Format("<h3> #{0} </h3>", indexHank))   @string.Format("{0} ({1}) Rank: {2:###.##}", equipe.Nome, equipe.Hash, equipe.GetRankValue())
+             </label>
+            <div id="equipe_@equipe.EquipeId"></div>
+        </div>
+    }
+</div>
+
+
+
+
+<script>
+    $(document).ready(function() {
+
+        $(".gerarCFD").each(function() {
+            loadCfd($(this).data("dados"), $(this).data("time"), $(this).data("jogo"));
+        });
+
+
+        function loadCfd(divDados, time, jogo) {
+
+            var data = new Object();
+            data.time = time;
+            data.jogo = jogo; //(new Date).getFullYear() + '-01-01';
+
+
+            $.ajax({
+                dataType: "json",
+                url: "@Url.Action("", "api/LancamentoBoard")",
+                data: data,
+                complete: function() {
+                    //$("#_LoadingCFD").hide();
+                },
+                success: function(datas) {
+                    if (datas != null) {
+                        renderComulativeFlow(divDados, 'CFD', 'Source: agilegame.local', datas.dias, " Chamado", ' Chamado(s)', datas.serie);
+                    }
+                }
+
+            });
+        }
+    });
+</script>
+
+@Html.ActionLink("Back to List", "Index") |
