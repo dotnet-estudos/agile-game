@@ -53,8 +53,8 @@ namespace Web
                 string sourceFileLog = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataBase", "AgileGame_log.ldf");
                 string destFileLog = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "AgileGame_log.ldf");
 
-                System.IO.File.Copy(sourceFileMdf, destFileMdf, true);
-                System.IO.File.Copy(sourceFileLog, destFileLog, true);
+                //System.IO.File.Copy(sourceFileMdf, destFileMdf, true);
+                //System.IO.File.Copy(sourceFileLog, destFileLog, true);
             }
         }
     }
