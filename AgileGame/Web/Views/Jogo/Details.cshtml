@@ -68,6 +68,9 @@
             @Html.DisplayNameFor(model => model.NomeTurma)
         </th>
         <th>
+            @Html.DisplayName("Id Time")
+        </th>
+        <th>
             @Html.DisplayName("Hash")
         </th>
         <th>
@@ -92,6 +95,9 @@
                 @Html.DisplayFor(modelItem => item.Jogo.NomeTurma)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.EquipeId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Hash)
             </td>
             <td>
@@ -104,10 +110,10 @@
                 @item.GetEsforcoKaizen()
             </td>
             <td>
-               <i title="@item.GetRankValuePercent().ToString("##.##")%">@item.GetRankValue().ToString("##.###")</i> 
+                <i title="@item.GetRankValuePercent().ToString("##.##")%">@item.GetRankValue().ToString("##.###")</i>
             </td>
             <td>
-                @Html.ActionLink("Board", "_LancamentoBoard", new { id = item.EquipeId }, htmlAttributes: new { @class="btn btn-primary"})  |
+                @Html.ActionLink("Board", "_LancamentoBoard", new {id = item.EquipeId}, htmlAttributes: new {@class = "btn btn-primary"}) |
                 @*<input type="button" class="btn btn-primary" name="name" value="Board" onclick=" ShowLancamentoBoard(@item.EquipeId); "/>*@
                 @*@Html.ActionLink("Edit", "Edit", "Equipe", new {id = item.EquipeId}) |
                 @Html.ActionLink("Details", "Details", "Equipe", new {id = item.EquipeId}) |*@

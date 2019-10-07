@@ -46,7 +46,7 @@ namespace Web.Controllers.API
 
             fases.ForEach(fase =>
             {
-                var count = Dias.Select(dia => lancamentos.Where(x => x.DiaLancamento == dia && x.FaseId == fase.FaseId).Sum(x=>x.Quantidade)).ToArray();
+                var count = Dias.Select(dia => lancamentos.Where(x => x.DiaLancamento <= dia && x.FaseId == fase.FaseId).Sum(x=>x.Quantidade)).ToArray();
 
                 serie.Add(new { name=fase.Nome, data = count, color= fase.RGB  });
 

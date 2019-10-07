@@ -297,8 +297,7 @@
     <Content Include="fonts\awnsome\fa-brands-400.ttf" />
     <Content Include="fonts\awnsome\fa-brands-400.woff" />
     <Content Include="fonts\awnsome\fa-brands-400.woff2" />
-    <None Include="Properties\PublishProfiles\Homologa.agilegame.pubxml" />
-    <None Include="Properties\PublishProfiles\Localhost-normal.pubxml" />
+    <None Include="Properties\PublishProfiles\Homologa.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\comprasnet.utils.js" />
     <Content Include="Scripts\demo1.js" />

@@ -54,7 +54,7 @@ namespace Domain.Entidade
         public double GetRankValue()
         {
 
-            var retorno =  (100-((this.GetLeadTime() *100)/49)) == 100 ? 0 : 100 - ((this.GetLeadTime() * 100) / 49)  + ((this.GetEsforcoKaizen()*100)/230);
+            var retorno =  (100-((this.GetLeadTime() *100)/42)) == 100 ? 0 : 100 - ((this.GetLeadTime() * 100.0) / 42.0)  + ((this.GetEsforcoKaizen()*100)/185);
 
             return retorno;
         }
@@ -62,7 +62,7 @@ namespace Domain.Entidade
         public double GetRankValuePercent()
         {
 
-            var retorno = this.GetRankValue()/2;
+            var retorno = this.GetRankValue()/2.0;
 
             return retorno;
         }
