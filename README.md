@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="docs/logo.png" alt="AgileGame" width="520">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.png">
+    <img src="docs/logo.png" alt="AgileGame" width="520">
+  </picture>
 </p>
 
 <p align="center">
