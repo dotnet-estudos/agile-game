@@ -7,3 +7,6 @@
 
 # Código JavaScript próprio continua contando
 AgileGame/Web/Scripts/js/AgileGame.js -linguist-vendored
+
+# Arquivo do instalador InstallShield (o GitHub confunde com Inno Setup)
+AgileGame/Setup/*.isl linguist-vendored
