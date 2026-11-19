@@ -172,3 +172,7 @@ Este é um projeto de 2018–2019 mantido como registro; ele não recebeu atuali
 ## Autor
 
 Desenvolvido por **Uhitlei Barbosa**.
+
+## Licença
+
+Distribuído sob a [licença MIT](LICENSE).
